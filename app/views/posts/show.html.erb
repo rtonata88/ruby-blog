@@ -1,1 +1,28 @@
-<p>Show posts goes here</p>
+    <div class="row py-2">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="row border rounded overflow-hidden p-2">
+                <div class="col-md-8">
+                    <h3 class="mb-0"><%= @post.title %></h3>
+                    <div class="mb-1 text-muted">
+                        <p>
+                            <%= @post.text %>
+                        </p>
+                        <span class="badge bg-primary">
+                           Comments: <%= @post.comments_counter %>
+                        </span>
+                        <span class="badge bg-info text-dark">
+                           Likes: <%= @post.likes_counter %>
+                        </span>
+                        <hr>
+                        <i>
+                        <% @post.comments.each do |comment| %>
+                        <p>
+                            <strong><%= comment.post.author.name %></strong>: <%= comment.text %>
+                        </p>
+                        <% end %>
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
