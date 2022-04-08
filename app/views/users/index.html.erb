@@ -1,1 +1,21 @@
-<p>List of users goes here</p>
+<main>
+  <section class="py-5 container">
+  <% @users.each do |user| %>
+    <div class="row py-lg-2">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <%= link_to controller: "users", action: "show", id: user.id do %>
+       <div class="row border rounded overflow-hidden p-2">
+        <div class="col-md-4">
+          <%= image_tag( user.photo, class:"img-fluid rounded", width: "200", height:"250") %>
+        </div>
+        <div class="col-md-8">
+          <h3 class="mb-0"><%= user.name %></h3>
+          <div class="mb-1 text-muted">Posts: <%= user.posts_counter || 0 %></div>
+        </div>
+      </div>
+      <% end %>
+      </div>
+    </div>
+    <% end %>
+  </section>
+</main>
