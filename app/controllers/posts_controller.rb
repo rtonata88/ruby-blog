@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
- def new
+  def new
     @user = User.find(params[:user_id])
     @post = Post.new
     respond_to do |format|
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def create 
+  def create
     user_id = params.require(:post).permit(:user_id)
     @user = User.where(id: user_id['user_id']).first
     @post = Post.new(params.require(:post).permit(:title, :text, :user_id))

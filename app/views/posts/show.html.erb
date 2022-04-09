@@ -13,6 +13,7 @@
                         <span class="badge bg-info text-dark">
                            Likes: <%= @post.likes_counter %>
                         </span>
+                         <%= button_to 'Like this post',"/likes/#{@post.id}"%>
                         <hr>
                         <i>
                         <% @post.comments.each do |comment| %>
