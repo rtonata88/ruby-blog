@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  user = User.new( name: 'Richard', bio: 'Teacher from Mexico', posts_counter: 0)
+  user = User.new(name: 'Richard', bio: 'Teacher from Mexico', posts_counter: 0)
   post = Post.new(author: user, title: 'Hello', text: 'This is my first post', likes_counter: 0, comments_counter: 0)
 
   subject do
-    Comment.new(post:post, author: user, text: 'This is my first comment')
+    Comment.new(post: post, author: user, text: 'This is my first comment')
   end
 
   before { subject.save }

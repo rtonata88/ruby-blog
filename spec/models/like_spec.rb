@@ -5,7 +5,7 @@ RSpec.describe Like, type: :model do
   post = Post.new(author: user, title: 'Hello', text: 'This is my first post', likes_counter: 0, comments_counter: 0)
 
   subject do
-    Like.new(post:post, author: user)
+    Like.new(post: post, author: user)
   end
 
   before { subject.save }
