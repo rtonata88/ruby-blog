@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  user = User.new(name: 'Richard', bio: 'Teacher from Mexico', posts_counter: 0)
+  post = Post.new(author: user, title: 'Hello', text: 'This is my first post', likes_counter: 0, comments_counter: 0)
+
+  subject do
+    Like.new(post:post, author: user)
+  end
+
+  before { subject.save }
+
+  it 'set_post_likes_counter should return a right result when called with after_save' do
+    expect(subject.post.likes_counter).to eq(1)
+  end
 end

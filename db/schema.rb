@@ -45,8 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_200514) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "primary_key"
     t.string "name"
     t.string "photo"
     t.text "bio"
