@@ -5,12 +5,15 @@
       <div class="col-lg-6 col-md-8 mx-auto">
         <%= link_to controller: "users", action: "show", id: user.id do %>
        <div class="row border rounded overflow-hidden p-2">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <%= image_tag( user.photo, class:"img-fluid rounded", width: "200", height:"250") %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
           <h3 class="mb-0"><%= user.name %></h3>
-          <div class="mb-1 text-muted">Posts: <%= user.posts_counter || 0 %></div>
+          <div class="mb-1 text-muted">Posts: <%= user.posts.count || 0 %></div>
+            <%= link_to "/post/new/#{user.id}" do %>
+             New post
+            <% end %>
         </div>
       </div>
       <% end %>
