@@ -8,7 +8,10 @@
         </div>
         <div class="col-md-8">
           <h3 class="mb-0"><%= @user.name %></h3>
-          <div class="mb-1 text-muted">Posts: <%= @user.posts_counter || 0 %></div>
+          <div class="mb-1 text-muted">Posts: <%= @user.posts.count || 0 %></div>
+           <%= link_to "/post/new/#{@user.id}" do %>
+             New post
+            <% end %>
         </div>
       </div>
       </div>
@@ -33,7 +36,7 @@
         <div class="col-lg-6 col-md-8 mx-auto">
             <div class="row border rounded overflow-hidden p-2">
                 <div class="col-md-8">
-                 <%= link_to "/users/#{@user.id}/posts" do %>
+                <%= link_to "/users/#{@user.id}/posts/#{post.id}" do %>
                     <h3 class="mb-0"><%= post.title %></h3>
                 <% end %>
                     <div class="mb-1 text-muted">
