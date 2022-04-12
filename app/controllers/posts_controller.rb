@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   def create
     user_id = params.require(:post).permit(:user_id)
     @user = User.where(id: user_id['user_id']).first
-    @post = Post.new(params.require(:post).permit(:authenticity_token, :title, :text, :user_id))
+    @post = Post.new(params.require(:post).permit(:title, :text, :user_id, :authenticity_token))
 
     if @post.save
       redirect_to user_posts_path(@user), notice: 'Saved successfully'
