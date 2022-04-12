@@ -16,14 +16,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    user_id = params.require(:post).permit(:user_id)
-    @user = User.where(id: user_id['user_id']).first
+    @user = current_user
     @post = Post.new(params.require(:post).permit(:authenticity_token, :title, :text, :user_id))
+    @post.author_id = current_user.id
+    @post.comments_counter = 0
+    @post.likes_counter = 0
 
     if @post.save
-      redirect_to user_posts_path(@user), notice: 'Saved successfully'
+      redirect_to user_posts_path(@user), notice: 'Post was successfully created.'
     else
-      flash[:notice] = 'Whoops!! Please try again. Something went wrong'
+      flash[:notice] = 'Something went wrong!'
       render 'posts/index'
     end
   end
