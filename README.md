@@ -43,6 +43,19 @@ Note: In case this doesn't work, try `rails db:drop` and do the steps all over a
 ### Usage
 - Run `rails s` to expose a local webserver
 
+### Sending emails
+To test for emails sign up for FREE with [Mailtrap.io](https://mailtrap.io/). 
+Once signed up, copy your email configuration details for mailtrap and configure them in your `config/credentials.rb` file. Please see example below.
+
+`ActionMailer::Base.smtp_settings = {`<br>
+  `:user_name => '<as_provided_by_mailtrap>',`<br>
+  `:password => '<as_provided_by_mailtrap>',`<br>
+  `:address => 'smtp.mailtrap.io',`<br>
+  `:domain => 'smtp.mailtrap.io',`<br>
+  `:port => '2525',`<br>
+  `:authentication => :cram_md5`<br>
+`}`<br>
+
 ## Author
 
 👤 **Richard Chambula**
