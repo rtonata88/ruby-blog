@@ -8,7 +8,9 @@
         <%= link_to controller: "users", action: "show", id: user.id do %>
        <div class="row border rounded overflow-hidden p-2">
         <div class="col-md-3">
-          <%= image_tag( user.photo, class:"img-fluid rounded", width: "200", height:"250") %>
+        <% if user.photo %>
+          <%= image_tag( user.photo , class:"img-fluid rounded", width: "200", height:"250") %>
+          <% end %>
         </div>
         <div class="col-md-9">
           <h3 class="mb-0"><%= user.name %></h3>
