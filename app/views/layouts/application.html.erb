@@ -13,7 +13,7 @@
   <body>
    <nav class="container d-flex">
         <% if user_signed_in? %>
-          <a href="/posts/new" class="nav-link">Create Post</a>
+          <a href="/post/new" class="nav-link">Create Post</a>
         <% end %>
         <a href="/" class="nav-link">Home</a>
         <% unless user_signed_in? %>
