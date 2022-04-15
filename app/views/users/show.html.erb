@@ -6,10 +6,16 @@
         <div class="col-md-4">
         <%if @user.photo?%>
           <%= image_tag( @user.photo, class:"img-fluid rounded", width: "200", height:"250") %>
+          <%else%>
+            <%= image_tag('no-photo.jpg', class:"img-fluid rounded") %>
           <%end%>
         </div>
         <div class="col-md-8">
-          <h3 class="mb-0"><%= @user.name %></h3>
+          <h3 class="mb-0">
+          <%= link_to  "/users/#{@user.id}/posts" do %>
+            <%= @user.name %>
+          <% end %>
+          </h3>
           <div class="mb-1 text-muted">Posts: <%= @user.posts.count || 0 %></div>
            <%= link_to "/post/new" do %>
              New post
@@ -39,7 +45,7 @@
             <div class="row border rounded overflow-hidden p-2">
                 <div class="col-md-8">
                 <%= link_to "/users/#{@user.id}/posts/#{post.id}" do %>
-                    <h3 class="mb-0"><%= post.title %></h3>
+                   <div class="post-title"> <h3 class="mb-0"><%= post.title %></h3> </div>
                 <% end %>
                     <div class="mb-1 text-muted">
                         <p>

@@ -66,56 +66,63 @@ RSpec.describe 'User', type: :feature do
   describe 'show' do
     before :each do
       visit new_user_session_path
-      fill_in 'Email', with: 'john@example.com'
+      fill_in 'Email', with: 'jane@example.com'
       fill_in 'Password', with: '123456'
       click_button 'Log in'
 
-      if @first_user.posts.count < 3
-        unless @first_user.posts.find_by(title: 'Post title 1')
-          @post1 = @first_user.posts.create!(title: 'Post title 1',
-                                             text: 'Post text 1')
-        end
-        @post2 = @first_user.posts.create!(title: 'Post title 2', text: 'Post text 2')
-        @post3 = @first_user.posts.create!(title: 'Post title 3', text: 'Post text 3')
+      @post1 = Post.find_by(title: 'Post #1')
+      @post2 = Post.find_by(title: 'Post #2')
+      @post3 = Post.find_by(title: 'Post #3')
+
+      if @post1.nil?
+        @post1 = Post.create(author:  @first_user, title: 'Post #1', text: 'Post #1', comments_counter: 0, likes_counter: 0)
       end
-      @post1 = @first_user.posts.find(1)
-      @post2 = @first_user.posts.find(2)
-      @post3 = @first_user.posts.find(3)
-      click_link 'Tom'
+
+      if @post2.nil?
+        @post2 = Post.create(author:  @first_user, title: 'Post #2', text: 'Post #2', comments_counter: 0, likes_counter: 0)
+      end
+
+      if @post3.nil?
+        @post3 = Post.create(author:  @first_user, title: 'Post #3', text: 'Post #3', comments_counter: 0, likes_counter: 0)
+      end
+
     end
 
-    it 'shows the correct path' do
-      expect(page).to have_current_path(user_path(@first_user))
-    end
+     before :each do
+        visit "/users/#{@first_user.id}"
+      end
 
-    it 'shows the user profile picture' do
+    it 'I can see the user\'s profile picture' do
       all_images = page.all('img')
       expect(all_images.count).to eq(1)
     end
 
-    it 'shows the user username' do
-      expect(page.find('h4', text: 'Tom')).to be_truthy
+    it 'shows the correct path' do
+      expect(page).to have_current_path("/users/#{@first_user.id}")
     end
 
-    it 'shows the user post count' do
+    it 'shows the user username' do
+      expect(page.find('h3', text: 'Jane Doe')).to be_truthy
+    end
+
+    it 'I can see the number of posts the user has written.' do
       expect(page).to have_content("Posts: #{@first_user.posts.count}")
     end
 
-    it 'shows the user bio' do
+    it 'I can see the user\'s bio.' do
       expect(page).to have_content(@first_user.bio)
     end
 
-    it 'shows the user\'s first three posts' do
-      expect(page.find_all('div', class: 'post-card').count).to eq(3)
+    it 'I can see the user\'s first 3 posts.' do
+      expect(page.find_all('div', class: ['post-title']).count).to eq(3)
     end
 
-    it 'shows the user\'s posts when any post is clicked' do
+    it 'When I click a user\'s post, it redirects me to that post\'s show page' do
       click_link @post1.title
-      expect(page).to have_current_path(user_posts_path(@first_user))
+      expect(page).to have_current_path("/users/#{@post1.user_id}/posts/#{@post1.id}")
     end
 
-    it 'shows the post details when any post is clicked in the post index page' do
-      click_link @post1.title
+    it 'When I click to see all posts, it redirects me to the user\'s post\'s index page.' do
       click_link @post1.title
       expect(page).to have_current_path(user_post_path(@first_user, @post1))
     end

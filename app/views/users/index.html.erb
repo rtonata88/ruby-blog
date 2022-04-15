@@ -5,7 +5,7 @@
   <% @users.each do |user| %>
     <div class="row py-lg-2">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <%= link_to controller: "users", action: "show", id: user.id do %>
+        
        <div class="row border rounded overflow-hidden p-2">
         <div class="col-md-3">
         <%if user.photo?%>
@@ -13,14 +13,18 @@
           <%end%>
         </div>
         <div class="col-md-9">
-          <h3 class="mb-0"><%= user.name %></h3>
+          <h3 class="mb-0">
+          <%= link_to  "/users/#{user.id}" do %>
+            <%= user.name %>
+          <% end %>
+          </h3>
           <div class="mb-1 text-muted">Posts: <%= user.posts.count || 0 %></div>
             <%= link_to "/post/new" do %>
              New post
             <% end %>
         </div>
       </div>
-      <% end %>
+      
       </div>
     </div>
     <% end %>
