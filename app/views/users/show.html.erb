@@ -4,12 +4,14 @@
       <div class="col-lg-6 col-md-8 mx-auto">
        <div class="row border rounded overflow-hidden p-2">
         <div class="col-md-4">
+        <%if @user.photo?%>
           <%= image_tag( @user.photo, class:"img-fluid rounded", width: "200", height:"250") %>
+          <%end%>
         </div>
         <div class="col-md-8">
           <h3 class="mb-0"><%= @user.name %></h3>
           <div class="mb-1 text-muted">Posts: <%= @user.posts.count || 0 %></div>
-           <%= link_to "/post/new/#{@user.id}" do %>
+           <%= link_to "/post/new" do %>
              New post
             <% end %>
         </div>

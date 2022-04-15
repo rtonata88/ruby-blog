@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
     @user = User.includes(:comments, :posts).find(params[:user_id])
   end
@@ -10,25 +10,31 @@ class PostsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
-    @post = Post.new
+    @user = current_user
+    post = Post.new
     respond_to do |format|
-      format.html { render :new, locals: { post: @post } }
+      format.html { render :new, locals: { post: post } }
     end
   end
 
-  def create
-    @user = current_user
-    @post = Post.new(params.require(:post).permit(:authenticity_token, :title, :text, :user_id))
-    @post.author_id = current_user.id
-    @post.comments_counter = 0
-    @post.likes_counter = 0
-
-    if @post.save
-      redirect_to user_posts_path(@user), notice: 'Post was successfully created.'
-    else
-      flash[:notice] = 'Something went wrong!'
-      render 'posts/index'
+ def create
+    # new object from params
+    post = Post.new(author: current_user, title: params[:post][:title], text: params[:post] [:text])
+    # respond_to block
+    respond_to do |format|
+      format.html do
+        if post.save
+          # success message
+          flash[:success] = 'Post created successfully'
+          # redirect to index
+          redirect_to "/users/#{current_user.id}/posts"
+        else
+          # error message
+          flash.now[:error] = 'Error: Post could not be created'
+          # render new
+          render :new, locals: { post: post}
+        end
+      end
     end
   end
 end
