@@ -66,8 +66,8 @@ RSpec.describe 'User', type: :feature do
   describe 'show' do
     before :each do
       visit new_user_session_path
-      fill_in 'Email', with: 'tom@example.com'
-      fill_in 'Password', with: '222555'
+      fill_in 'Email', with: 'john@example.com'
+      fill_in 'Password', with: '123456'
       click_button 'Log in'
 
       if @first_user.posts.count < 3
