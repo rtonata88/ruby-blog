@@ -104,8 +104,8 @@ RSpec.describe 'Post', type: :feature do
     end
 
     it 'shows who wrote the comment' do
-      #page.find_all('span', class: ['comments']).count
+      # page.find_all('span', class: ['comments']).count
       expect(page).to have_content("#{@comment1.author.name}: #{@comment1.text}")
     end
-   end
+  end
 end
