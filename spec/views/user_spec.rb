@@ -2,23 +2,23 @@ require 'rails_helper'
 
 RSpec.describe 'User', type: :feature do
   before :all do
-    @first_user = User.find_by(name: 'Jane Doe')
-    @second_user = User.find_by(name: 'John Doe')
-    @third_user = User.find_by(name: 'Tom Doe')
+    @first_user = User.find_by(email: 'jane@example.com')
+    @second_user = User.find_by(email: 'john@example.com')
+    @third_user = User.find_by(email: 'tomdoe@example.com')
 
     if @first_user.nil?
       @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',
-                                email: 'jane@example.com')
+                                email: 'jane@example.com', confirmed_at: '2022-04-16 10:14:43.057417')
     end
 
     if @second_user.nil?
       @second_user = User.create(name: 'John Doe', photo: 'no-photo.jpg', bio: 'Programmer', password: '123456',
-                                 email: 'john@example.com')
+                                 email: 'john@example.com', confirmed_at: '2022-04-16 10:14:43.057417')
     end
 
     if @third_user.nil?
       @third_user = User.create(name: 'Tom Doe', photo: 'no-photo.jpg', bio: 'Businessman', password: '123456',
-                                email: 'tom@example.com')
+                                email: 'tomdoe@example.com', confirmed_at: '2022-04-16 10:14:43.057417')
     end
   end
 
@@ -30,17 +30,17 @@ RSpec.describe 'User', type: :feature do
 
       if @first_user.nil?
         @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',
-                                  email: 'jane@example.com')
+                                  email: 'jane@example.com', confirmed_at: '2022-04-16 10:14:43.057417')
       end
 
       if @second_user.nil?
         @second_user = User.create(name: 'John Doe', photo: 'no-photo.jpg', bio: 'Programmer', password: '123456',
-                                   email: 'john@example.com')
+                                   email: 'john@example.com', confirmed_at: '2022-04-16 10:14:43.057417')
       end
 
       if @third_user.nil?
         @third_user = User.create(name: 'Tom Doe', photo: 'no-photo.jpg', bio: 'Businessman', password: '123456',
-                                  email: 'tom@example.com')
+                                  email: 'tom@example.com', confirmed_at: '2022-04-16 10:14:43.057417')
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe 'User', type: :feature do
 
     it 'See the profile picture for each user' do
       all_images = page.all('img')
-      expect(all_images.count).to eq(3)
+      expect(all_images.count).to eq(User.all.count)
     end
 
     it 'See the number of posts each user has written' do
@@ -65,7 +65,7 @@ RSpec.describe 'User', type: :feature do
 
     it 'When I click on a user, I am redirected to that user\'s show page.' do
       click_link 'Tom Doe'
-      expect(page).to have_current_path(user_path('3'))
+      expect(page).to have_current_path(user_path(@third_user.id))
     end
   end
 

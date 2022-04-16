@@ -40,7 +40,7 @@ RSpec.describe 'Login', type: :feature do
       expect(page).to have_content('Invalid Email or password.')
     end
 
-    it 'When I click the submit button after fillingwith correct data, I am redirected to the root page.' do
+    it 'When I click the submit button after filling with correct data, I am redirected to the root page.' do
       fill_in 'Email', with: 'tom@example.com'
       fill_in 'Password', with: '222555'
       click_on 'Log in'
