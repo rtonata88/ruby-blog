@@ -1,7 +1,4 @@
 class User < ApplicationRecord
-  def init
-    self.posts_counter = 0
-  end
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,5 +13,9 @@ class User < ApplicationRecord
 
   def most_recent_posts
     posts.last(3)
+  end
+
+  def admin?
+    true if role == 'admin'
   end
 end
