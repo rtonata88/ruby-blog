@@ -7,15 +7,18 @@ RSpec.describe 'User', type: :feature do
     @third_user = User.find_by(name: 'Tom Doe')
 
     if @first_user.nil?
-      @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',email: 'jane@example.com')
+      @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',
+                                email: 'jane@example.com')
     end
 
     if @second_user.nil?
-      @second_user = User.create(name: 'John Doe', photo: 'no-photo.jpg', bio: 'Programmer', password: '123456',email: 'john@example.com')
+      @second_user = User.create(name: 'John Doe', photo: 'no-photo.jpg', bio: 'Programmer', password: '123456',
+                                 email: 'john@example.com')
     end
 
     if @third_user.nil?
-      @third_user = User.create(name: 'Tom Doe', photo: 'no-photo.jpg', bio: 'Businessman', password: '123456',email: 'tom@example.com')
+      @third_user = User.create(name: 'Tom Doe', photo: 'no-photo.jpg', bio: 'Businessman', password: '123456',
+                                email: 'tom@example.com')
     end
   end
 
@@ -26,20 +29,23 @@ RSpec.describe 'User', type: :feature do
       @third_user = User.find_by(name: 'Tom Doe')
 
       if @first_user.nil?
-        @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',email: 'jane@example.com')
+        @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',
+                                  email: 'jane@example.com')
       end
 
       if @second_user.nil?
-        @second_user = User.create(name: 'John Doe', photo: 'no-photo.jpg', bio: 'Programmer', password: '123456',email: 'john@example.com')
+        @second_user = User.create(name: 'John Doe', photo: 'no-photo.jpg', bio: 'Programmer', password: '123456',
+                                   email: 'john@example.com')
       end
 
       if @third_user.nil?
-        @third_user = User.create(name: 'Tom Doe', photo: 'no-photo.jpg', bio: 'Businessman', password: '123456',email: 'tom@example.com')
+        @third_user = User.create(name: 'Tom Doe', photo: 'no-photo.jpg', bio: 'Businessman', password: '123456',
+                                  email: 'tom@example.com')
       end
     end
 
     before :each do
-      visit "/"
+      visit '/'
     end
 
     it 'shows the names of all users' do
@@ -75,22 +81,24 @@ RSpec.describe 'User', type: :feature do
       @post3 = Post.find_by(title: 'Post #3')
 
       if @post1.nil?
-        @post1 = Post.create(author:  @first_user, title: 'Post #1', text: 'Post #1', comments_counter: 0, likes_counter: 0)
+        @post1 = Post.create(author: @first_user, title: 'Post #1', text: 'Post #1', comments_counter: 0,
+                             likes_counter: 0)
       end
 
       if @post2.nil?
-        @post2 = Post.create(author:  @first_user, title: 'Post #2', text: 'Post #2', comments_counter: 0, likes_counter: 0)
+        @post2 = Post.create(author: @first_user, title: 'Post #2', text: 'Post #2', comments_counter: 0,
+                             likes_counter: 0)
       end
 
       if @post3.nil?
-        @post3 = Post.create(author:  @first_user, title: 'Post #3', text: 'Post #3', comments_counter: 0, likes_counter: 0)
+        @post3 = Post.create(author: @first_user, title: 'Post #3', text: 'Post #3', comments_counter: 0,
+                             likes_counter: 0)
       end
-
     end
 
-     before :each do
-        visit "/users/#{@first_user.id}"
-      end
+    before :each do
+      visit "/users/#{@first_user.id}"
+    end
 
     it 'I can see the user\'s profile picture' do
       all_images = page.all('img')

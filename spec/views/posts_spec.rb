@@ -5,9 +5,10 @@ RSpec.describe 'Post', type: :feature do
     @first_user = User.find_by(name: 'Jane Doe')
 
     if @first_user.nil?
-      @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',email: 'jane@example.com')
+      @first_user = User.create(name: 'Jane Doe', photo: 'no-photo.jpg', bio: 'Farmer', password: '123456',
+                                email: 'jane@example.com')
     end
-  
+
     visit new_user_session_path
     fill_in 'Email', with: 'jane@example.com'
     fill_in 'Password', with: '123456'
@@ -16,7 +17,8 @@ RSpec.describe 'Post', type: :feature do
     @post1 = Post.find_by(title: 'Post #1')
 
     if @post1.nil?
-        @post1 = Post.create(author:  @first_user, title: 'Post #1', text: 'Post #1', comments_counter: 0, likes_counter: 0)
+      @post1 = Post.create(author: @first_user, title: 'Post #1', text: 'Post #1', comments_counter: 0,
+                           likes_counter: 0)
     end
 
     if @post.comments.empty?

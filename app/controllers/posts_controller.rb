@@ -13,11 +13,11 @@ class PostsController < ApplicationController
     @user = current_user
     post = Post.new
     respond_to do |format|
-      format.html { render :new, locals: { post: post } }
+      format.html { render :new, locals: { post: } }
     end
   end
 
- def create
+  def create
     # new object from params
     post = Post.new(author: current_user, title: params[:post][:title], text: params[:post] [:text])
     # respond_to block
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
           # error message
           flash.now[:error] = 'Error: Post could not be created'
           # render new
-          render :new, locals: { post: post}
+          render :new, locals: { post: }
         end
       end
     end
